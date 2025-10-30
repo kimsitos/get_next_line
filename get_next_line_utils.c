@@ -6,23 +6,23 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:01 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/10/29 17:56:22 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/10/30 12:14:51 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *str, int c)
 {
 	while (*str)
 	{
 		if (*str == (char)c)
-			return (1);
+			return ((char *)str);
 		str++;
 	}
 	if (*str == (char)c)
-		return (1);
-	return (0);
+		return ((char *)str);
+	return (NULL);
 }
 
 int	ft_strlen(const char *str)

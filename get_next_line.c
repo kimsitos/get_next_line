@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/10/29 18:04:54 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:04:35 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,30 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*buffer;
 	char		*line;
+	//char		*temp_line;
+	ssize_t		buffer_result;
 
 	line = "";
+	buffer_result = 1;
 	if (fd == -1)
 		return (NULL);
-	str = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!str)
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (0);
-	while (ft_strchr(line, '\n'))
+	while (buffer_result > 0)
 	{
-		read(fd, str, BUFFER_SIZE);
-		line = ft_strjoin(str, line);
+		buffer_result = read (fd, buffer, BUFFER_SIZE);
+		
+		//temp_line = line;
+		line = ft_strjoin(line, buffer);
+		//free(temp_line);
+		if (ft_strchr(buffer, '\n'))
+			break ;
+		free(buffer);
 	}
+	free(buffer);
 	return (line);
 }
 
