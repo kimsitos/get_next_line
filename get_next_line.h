@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:04:08 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/10/31 13:04:11 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:44:02 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ char	*get_next_line(int fd);
 //gnl_utils.c
 char	*ft_strchr(const char *str, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *s);
 
 #endif

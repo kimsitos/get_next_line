@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:01 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/10/31 13:01:19 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:40:13 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,18 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-int	ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	len;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	len = 0;
+	while (*str)
+	{
+		len++;
+		str++;
+	}
+	return (len);
 }
-
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -58,5 +60,23 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	temp[i + j] = '\0';
+	return (temp);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*temp;
+	size_t	i;
+
+	i = 0;
+	temp = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!temp)
+		return (0);
+	while (s[i])
+	{
+		temp[i] = s[i];
+		i++;
+	}
+	temp[i] = '\0';
 	return (temp);
 }
