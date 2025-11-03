@@ -6,18 +6,18 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/10/31 13:01:17 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:15:37 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*get_next_line(int fd)
+static char	*get_line(int fd, char *line)
 {
 	char		*buffer;
-	static char	*line;
 	ssize_t		buffer_result;
+	char		*temp_line;
 
 	buffer_result = 1;
 	if (fd == -1)
@@ -29,13 +29,47 @@ char	*get_next_line(int fd)
 	{
 		buffer_result = read (fd, buffer, BUFFER_SIZE);
 		buffer[BUFFER_SIZE] = '\0';
-		line = ft_strjoin(line, buffer);
-		printf("LINEA ACTUAL: %s\nBUFFER AÑADIDO: %s\n--------------\n", line, buffer);
+		temp_line = line;
+		line = ft_strjoin(temp_line, buffer);
+		free(temp_line);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
 	free(buffer);
-	buffer = NULL;
+	return (line);
+}
+
+static char	*fill_line(char *rest)
+{
+	size_t	i;
+	size_t	j;
+	char	*line;
+
+	i = 0;
+	j = 0;
+	while (rest[i] != '\n' && rest[i])
+		i++;
+	line = malloc((i + 1) * sizeof(char));
+	if (!line)
+		return (0);
+	while (i > j)
+	{
+		line[j] = rest[j];
+		j++;
+	}
+	line[j] = '\0';
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*rest;
+	char		*line;
+
+	if (!rest)
+		rest = ft_strdup("");
+	rest = get_line(fd, rest);
+	line = fill_line(rest);
 	return (line);
 }
 
@@ -45,9 +79,14 @@ char	*get_next_line(int fd)
 int main(void)
 {
 	int fd = open("text.txt", O_RDONLY);
-	char *str = get_next_line(fd);
+	char *str;
+	str = "hello";
+	while (str)
+	{
+		str = get_next_line(fd);
+		printf ("RESULT: %s\n", str);
+	}
 	close (fd);
-	printf ("RESULT: %s\n", str);
 	free(str);
 	return 0;
 }
