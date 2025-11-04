@@ -6,11 +6,12 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:01 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/03 11:59:38 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:20:00 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*ft_strchr(const char *str, int c)
 {
@@ -48,18 +49,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	temp = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!temp)
+	{
+		printf("(ft_strjoin:53)error creating temp\n");
 		return (0);
+	}
 	while (s1[i])
 	{
 		temp[i] = s1[i];
+		printf("	(ft_strjoin:59)-FIRST STR char %d\n", i);
 		i++;
 	}
 	while (s2[j])
 	{
 		temp[i + j] = s2[j];
+		printf("	(ft_strjoin:65)+SECOND STR char %d\n", j);
 		j++;
 	}
 	temp[i + j] = '\0';
+	printf("(ft_strjoin:69)--=string joined succesfuly=--\n\n");
 	return (temp);
 }
 
@@ -78,5 +85,29 @@ char	*ft_strdup(const char *s)
 		i++;
 	}
 	temp[i] = '\0';
+	return (temp);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*temp;
+	size_t	j;
+
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	temp = malloc((len + 1) * sizeof(char));
+	j = 0;
+	if (!temp)
+		return (temp);
+	while (s[start + j] && j < len)
+	{
+		temp[j] = s[start + j];
+		j++;
+	}
+	temp[j] = 0;
 	return (temp);
 }

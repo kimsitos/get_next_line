@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:04:08 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/03 15:55:10 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:55:52 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE 
-#  define BUFFER_SIZE 47
+#  define BUFFER_SIZE 2
 # endif
 
 char	*get_next_line(int fd);
 
 //gnl_utils.c
 char	*ft_strchr(const char *str, int c);
+size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s);
-
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 #endif
