@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:04:08 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/04 15:55:52 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:08:07 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE 
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd);

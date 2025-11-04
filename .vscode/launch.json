@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Depurar programa",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/a.out", // Ruta del archivo compilado
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false, // Si quieres una consola externa para la ejecución, ponlo en true
+            "MIMode": "gdb",  // Puedes cambiarlo a "lldb" si usas ese depurador
+            "setupCommands": [
+                {
+                    "description": "Habilitar la depuración",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/gdb",  // Ruta al depurador GDB
+            "preLaunchTask": "Compilar código",  // La tarea de compilación que se ejecutará antes de depurar
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

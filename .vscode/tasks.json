@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar código",
+            "type": "shell",
+            "command": "cc -Wall -Werror -Wextra get_next_line*.c -g",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compilación personalizada con cc"
+        }
+    ]
+}

@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/04 16:27:03 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:13:09 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char	*get_line(int fd, char *line, char *buffer)
 			break ;
 		}
 	}
-	free(buffer);
 	return (line);
 }
 
@@ -88,7 +87,7 @@ char	*get_next_line(int fd)
 	static char	*rest;
 	char		*line;
 
-	if (fd == -1 || BUFFER_SIZE < 0)
+	if (fd == -1 || BUFFER_SIZE <= 0)
 	{
 		printf("(get_next_line:93)null file descriptor\n");
 		return (NULL);
@@ -104,12 +103,13 @@ char	*get_next_line(int fd)
 		printf("(get_next_line:104)buffer error creating\n");
 		return (0);
 	}
-	line = get_line(fd, rest, buffer);
-	rest = fill_line(line);
+	if (!ft_strchr(rest, '\n'))
+		rest = get_line(fd, rest, buffer);
+	line = fill_line(rest);
 	if (!rest)
 		return (NULL);
-	line = ft_substr(rest, ft_strlen(rest), ft_strlen(line) - ft_strlen(rest));
-	return (rest);
+	rest = ft_substr(rest, ft_strlen(line) + 1, ft_strlen(rest) - ft_strlen(line));
+	return (line);
 }
 
 
