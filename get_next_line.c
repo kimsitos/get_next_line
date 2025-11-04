@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/03 16:15:37 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/04 11:56:49 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,15 @@ char	*get_next_line(int fd)
 
 int main(void)
 {
-	int fd = open("text.txt", O_RDONLY);
-	char *str;
-	str = "hello";
-	while (str)
+	int fd = open("texto.txt", O_RDONLY);
+	char *linea;
+
+	while ((linea = get_next_line(fd)) != NULL)
 	{
-		str = get_next_line(fd);
-		printf ("RESULT: %s\n", str);
+		printf("Línea: %s", linea);
+		free(linea);
 	}
-	close (fd);
-	free(str);
-	return 0;
+
+	close(fd);
+	return (0);
 }
