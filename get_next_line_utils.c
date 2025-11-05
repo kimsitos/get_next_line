@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:01 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/04 16:20:00 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/05 18:24:04 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	temp = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!temp)
-	{
-		printf("(ft_strjoin:53)error creating temp\n");
 		return (0);
-	}
 	while (s1[i])
 	{
 		temp[i] = s1[i];
-		printf("	(ft_strjoin:59)-FIRST STR char %d\n", i);
 		i++;
 	}
 	while (s2[j])
 	{
 		temp[i + j] = s2[j];
-		printf("	(ft_strjoin:65)+SECOND STR char %d\n", j);
 		j++;
 	}
 	temp[i + j] = '\0';
-	printf("(ft_strjoin:69)--=string joined succesfuly=--\n\n");
 	return (temp);
 }
 
