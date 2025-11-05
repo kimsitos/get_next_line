@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/04 17:13:09 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/05 09:40:29 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char	*get_line(int fd, char *line, char *buffer)
 	while (buffer_result > 0)
 	{
 		buffer_result = read (fd, buffer, BUFFER_SIZE);
+		buffer[buffer_result] = '\0';
 		if (buffer_result == -1)
 		{
 			printf("(get_line:33)read error\n");
@@ -106,7 +107,7 @@ char	*get_next_line(int fd)
 	if (!ft_strchr(rest, '\n'))
 		rest = get_line(fd, rest, buffer);
 	line = fill_line(rest);
-	if (!rest)
+	if (!line)
 		return (NULL);
 	rest = ft_substr(rest, ft_strlen(line) + 1, ft_strlen(rest) - ft_strlen(line));
 	return (line);
@@ -124,10 +125,11 @@ int main(void)
 	// linea = get_next_line(fd);
 	// free (linea);
 	// linea = get_next_line(fd);
-	while ((linea = get_next_line(fd)) != NULL && i++ < 4)
+	while ((linea = get_next_line(fd)) != NULL)
 	{
-		printf ("##RESULT##%s\n", linea);
+		printf ("##RESULT NUMBER %d##%s\n", i, linea);
 		free(linea);
+		i++;
 	}
 
 	close(fd);
