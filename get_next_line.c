@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/05 18:25:46 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/06 13:24:16 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ static char	*get_line(int fd, char *line, char *buffer)
 	char		*temp_line;
 
 	buffer_result = 1;
-
-	
 	while (buffer_result > 0)
 	{
 		buffer_result = read (fd, buffer, BUFFER_SIZE);
 		buffer[buffer_result] = '\0';
-		if (buffer_result == -1)
+		if (buffer_result < 0)
 			return (NULL);
 		if (buffer_result == 0)
 			break ;
@@ -46,10 +44,12 @@ static char	*fill_line(char *rest)
 
 	i = 0;
 	j = 0;
+	if (!rest || !rest[0])
+		return (NULL);
 	while (rest[i] != '\n' && rest[i])
 		i++;
-	if (!rest[i])
-		return (NULL);
+	if (rest[i] == '\n')
+		i++;
 	line = malloc((i + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
@@ -66,10 +66,14 @@ char	*get_next_line(int fd)
 {
 	char		*buffer;
 	static char	*rest;
+	char		*temp;
 	char		*line;
 
 	if (fd == -1 || BUFFER_SIZE <= 0)
+	{
+		free(rest);
 		return (NULL);
+	}
 	if (!rest)
 		rest = ft_strdup("");
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -77,10 +81,15 @@ char	*get_next_line(int fd)
 		return (0);
 	if (!ft_strchr(rest, '\n'))
 		rest = get_line(fd, rest, buffer);
+	free (buffer);
 	line = fill_line(rest);
 	if (!line)
+	{
 		return (NULL);
-	rest = ft_substr(rest, ft_strlen(line) + 1, ft_strlen(rest) - ft_strlen(line));
+	}
+	temp = rest;
+	rest = ft_substr(temp, ft_strlen(line), ft_strlen(temp) - ft_strlen(line));
+	free(temp);
 	return (line);
 }
 
@@ -98,11 +107,11 @@ int main(void)
 	// linea = get_next_line(fd);
 	while ((linea = get_next_line(fd)))
 	{
-		printf ("##RESULT NUMBER %d##%s\n", i, linea);
+		printf ("##RESULT NUMBER %d##%s", i, linea);
 		free(linea);
 		i++;
 	}
-
+	get_next_line(-1);
 	close(fd);
 	return (0);
 }
