@@ -6,12 +6,11 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/06 13:46:39 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/06 13:49:47 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*get_line(int fd, char *line)
 {
@@ -94,6 +93,7 @@ char	*get_next_line(int fd)
 }
 
 // #include <fcntl.h>
+// #include <stdio.h>
 
 // int main(void)
 // {
