@@ -6,7 +6,7 @@
 /*   By: stcozaci <stcozaci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:04:05 by stcozaci          #+#    #+#             */
-/*   Updated: 2025/11/06 13:49:47 by stcozaci         ###   ########.fr       */
+/*   Updated: 2025/11/07 10:22:28 by stcozaci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd == -1 || BUFFER_SIZE <= 0)
-	{
-		free(rest);
 		return (NULL);
-	}
 	if (!rest)
 		rest = ft_strdup("");
 	if (!ft_strchr(rest, '\n'))
@@ -84,6 +81,7 @@ char	*get_next_line(int fd)
 	line = fill_line(rest);
 	if (!line)
 	{
+		free (rest);
 		return (NULL);
 	}
 	temp = rest;
@@ -106,7 +104,6 @@ char	*get_next_line(int fd)
 // 		free(linea);
 // 		i++;
 // 	}
-// 	get_next_line(-1);
 // 	close(fd);
 // 	return (0);
 // }
